@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.models.CustomerEntity" table="customer" schema="pi_ag">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="firstname">
+            <column name="firstname" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="lastname">
+            <column name="lastname" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="birthdate">
+            <column name="birthdate" sql-type="date" not-null="true"/>
+        </property>
+        <property name="genderId">
+            <column name="gender_id" sql-type="int(11)"/>
+        </property>
+    </class>
+</hibernate-mapping>
