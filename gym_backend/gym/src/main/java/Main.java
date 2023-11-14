@@ -36,7 +36,9 @@ public class Main {
                     System.out.println("  " + o.toString());
                 }
             }
+//            System.out.println(session.get(GenderEntity.class,1));
         } finally {
+
             session.close();
         }
     }

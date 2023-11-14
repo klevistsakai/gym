@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.example.models.SubscriptionEntity" table="subscription" schema="pi_ag">
+    <class name="com.example.gym.models.SubscriptionEntity" table="subscription" schema="pi_ag">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
         </id>

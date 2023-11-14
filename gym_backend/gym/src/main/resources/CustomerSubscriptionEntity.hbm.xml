@@ -4,8 +4,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.example.models.CustomerSubscriptionEntity" table="customer_subscription" schema="pi_ag">
-        <composite-id mapped="true" class="com.example.models.CustomerSubscriptionEntityPK">
+    <class name="com.example.gym.models.CustomerSubscriptionEntity" table="customer_subscription" schema="pi_ag">
+        <composite-id mapped="true" class="com.example.gym.models.CustomerSubscriptionEntityPK">
             <key-property name="customerId">
                 <column name="customer_id" sql-type="int(11)"/>
             </key-property>
