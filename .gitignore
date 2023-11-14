@@ -1,0 +1,24 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/gym_frontend/gym/node_modules
+/gym_frontend/gym/.pnp
+/gym_frontend/gym/.pnp.js
+
+# testing
+/gym_frontend/gym/coverage
+
+# production
+/gym_frontend/gym/build
+
+# misc
+/gym_frontend/gym/.env
+/gym_frontend/gym/.DS_Store
+/gym_frontend/gym/.env.local
+/gym_frontend/gym/.env.development.local
+/gym_frontend/gym/.env.test.local
+/gym_frontend/gym/.env.production.local
+
+/gym_frontend/gym/npm-debug.log*
+/gym_frontend/gym/yarn-debug.log*
+/gym_frontend/gym/yarn-error.log*
