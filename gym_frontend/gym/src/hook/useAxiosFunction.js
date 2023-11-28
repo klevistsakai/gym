@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 const useAxiosFunction = () => {
     const [response, setResponse] = useState([]);
@@ -12,7 +12,8 @@ const useAxiosFunction = () => {
             method,
             url,
             data,
-            callback=()=>{},
+            callback = () => {
+            },
             requestConfig = {}
         } = configObj;
         console.log(configObj);
@@ -20,7 +21,7 @@ const useAxiosFunction = () => {
             setLoading(true);
             const ctrl = new AbortController();
             setController(ctrl);
-            const res = await axiosInstance[method.toLowerCase()](url, data,{
+            const res = await axiosInstance[method.toLowerCase()](url, data, {
                 ...requestConfig,
                 signal: ctrl.signal
             });
@@ -28,7 +29,10 @@ const useAxiosFunction = () => {
             callback(res.data);
             setResponse(res.data);
         } catch (err) {
-            callback(null,err.message);
+            if (err?.response?.data) {
+                callback(null,err?.response?.data);
+            } else
+                callback(null, err.message);
             setError(err.message);
         } finally {
             setLoading(false);

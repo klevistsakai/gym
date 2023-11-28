@@ -11,8 +11,11 @@ import java.util.Optional;
 
 // Annotation
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 
 // Class
+@RequestMapping("/api")
+
 public class SubscriptionController {
 
     // Annotation

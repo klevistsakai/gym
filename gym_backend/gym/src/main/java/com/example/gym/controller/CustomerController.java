@@ -7,24 +7,28 @@ import com.example.gym.models.CustomerEntity;
 import com.example.gym.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 // Annotation
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 
 // Class
+@RequestMapping("/api")
 public class CustomerController {
 
     // Annotation
     @Autowired private CustomerService customerService;
 
     // Save operation
-    @PostMapping("/customers")
+    @PostMapping("/customers/save")
     public CustomerEntity saveCustomer(
-            @Valid @RequestBody CustomerEntity customer)
+            @Valid @RequestBody CustomerEntity customer, @RequestParam("subscriptionId") Long subscriptionId)
     {
+       return   customerService.saveCustomerWithSubscription(customer,subscriptionId);
 
-        return customerService.saveCustomer(customer);
+
     }
 
     // Read operation
@@ -42,14 +46,14 @@ public class CustomerController {
     }
 
     // Update operation
-    @PutMapping("/customers/update/{id}")
+    @PostMapping("/customers/update/{id}")
     public CustomerEntity
     updateCustomer(@RequestBody CustomerEntity customer,
-                   @PathVariable("id") Long customerId)
+                   @PathVariable("id") Long customerId, @RequestParam("subscriptionId") Long subscriptionId)
     {
 
-        return customerService.updateCustomer(
-                customer, customerId);
+        return customerService.updateCustomerWithSubscription(
+                customer, customerId,subscriptionId);
     }
 
     // Delete operation
@@ -60,6 +64,6 @@ public class CustomerController {
 
         customerService.deleteCustomerById(
                 customerId);
-        return "Deleted Successfully";
+        return "Deleted Successfully "+customerId;
     }
 }

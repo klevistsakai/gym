@@ -2,26 +2,29 @@ package com.example.gym.models;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "pi_ag", catalog = "")
+@Table(name = "user", schema = "pi_ag")
 public class UserEntity {
-    private int id;
+    private Integer id;
     private String username;
     private String passwordHash;
     private String firstname;
     private String lastname;
-    private int genderId;
+    private Integer genderId;
     private Byte validated;
+    private GenderEntity gender;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -67,11 +70,11 @@ public class UserEntity {
 
     @Basic
     @Column(name = "gender_id", nullable = false)
-    public int getGenderId() {
+    public Integer getGenderId() {
         return genderId;
     }
 
-    public void setGenderId(int genderId) {
+    public void setGenderId(Integer genderId) {
         this.genderId = genderId;
     }
 
@@ -85,16 +88,27 @@ public class UserEntity {
         this.validated = validated;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
-        return id == that.id && genderId == that.genderId && Objects.equals(username, that.username) && Objects.equals(passwordHash, that.passwordHash) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(validated, that.validated);
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(passwordHash, that.passwordHash) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(genderId, that.genderId) && Objects.equals(validated, that.validated);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, username, passwordHash, firstname, lastname, genderId, validated);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "gender_id", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
+    public GenderEntity getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderEntity gender) {
+        this.gender = gender;
     }
 }

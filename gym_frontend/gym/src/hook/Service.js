@@ -1,5 +1,6 @@
 import axios from '../api/gym';
 import { useState, useEffect } from "react";
+
 const Service = (configObj) => {
     const {
         method,
@@ -13,8 +14,8 @@ const Service = (configObj) => {
     const [loading, setLoading] = useState(true);
     const [reload, setReload] = useState(0);
 
-
-
+    const refetch = () => setReload(prev => prev + 1);
+    
     useEffect(() => {
         //let isMounted = true;
         const controller = new AbortController();
@@ -30,12 +31,9 @@ const Service = (configObj) => {
                         signal: controller.signal
                     }, ...requestConfig
                 });
-                
-                console.log("inside service")
-
                 setResponse(res.data);
             } catch (err) {
-            
+
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -51,7 +49,7 @@ const Service = (configObj) => {
         // eslint-disable-next-line
     }, [reload]);
 
-    return [response, error, loading];
+    return [response, error, reload, refetch];
 }
 
 export default Service

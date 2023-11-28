@@ -21,4 +21,5 @@ public interface HistoryService {
     void deleteHistoryById(Long historyId);
 
 
+    List<HistoryEntity> fetchHistoryByCustomerId(Long historyId);
 }

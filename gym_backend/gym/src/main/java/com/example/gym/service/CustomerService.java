@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface CustomerService {
     // save operation
-    CustomerEntity saveCustomer(CustomerEntity Customer);
-
+    CustomerEntity saveCustomer(CustomerEntity customer);
+    CustomerEntity saveCustomerWithSubscription(CustomerEntity customer,Long subscriptionId);
     // read operation
     List<CustomerEntity> fetchCustomerList();
 
@@ -16,7 +16,7 @@ public interface CustomerService {
 
     // update operation
     CustomerEntity updateCustomer(CustomerEntity Customer, Long CustomerId);
-
+     CustomerEntity updateCustomerWithSubscription(CustomerEntity customer, Long customerId,Long subscriptionId);
     // delete operation
     void deleteCustomerById(Long CustomerId);
 }

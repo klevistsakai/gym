@@ -2,23 +2,28 @@ package com.example.gym.models;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import java.util.Objects;
 
 @Entity
-@Table(name = "subscription", schema = "pi_ag", catalog = "")
+@Table(name = "subscription", schema = "pi_ag")
 public class SubscriptionEntity {
-    private int id;
+    private Integer id;
     private String planName;
-    private BigDecimal cost;
+    private Integer duration;
+    private BigInteger cost;
 
+
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -33,25 +38,35 @@ public class SubscriptionEntity {
     }
 
     @Basic
-    @Column(name = "cost", nullable = false, precision = 2)
-    public BigDecimal getCost() {
+    @Column(name = "duration", nullable = false)
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    @Basic
+    @Column(name = "cost", nullable = false, precision = 0)
+    public BigInteger getCost() {
         return cost;
     }
 
-    public void setCost(BigDecimal cost) {
+    public void setCost(BigInteger cost) {
         this.cost = cost;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubscriptionEntity that = (SubscriptionEntity) o;
-        return id == that.id && Objects.equals(planName, that.planName) && Objects.equals(cost, that.cost);
+        return Objects.equals(id, that.id) && Objects.equals(planName, that.planName) && Objects.equals(duration, that.duration) && Objects.equals(cost, that.cost);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, planName, cost);
-    }
+
+
 }

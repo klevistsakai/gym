@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 // Annotation
 @RestController
-
+@CrossOrigin(origins = "http://localhost:3000")
 // Class
+@RequestMapping(value = "/api" , produces = APPLICATION_JSON_VALUE)
+
 public class GenderController {
 
     // Annotation
@@ -52,6 +56,7 @@ public class GenderController {
         return genderService.updateGender(
                 gender, genderId);
     }
+
 
     // Delete operation
     @DeleteMapping("/genders/delete/{id}")

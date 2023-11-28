@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    // save operation
-    UserEntity saveUser(UserEntity user);
+        // save operation
+        UserEntity saveUser(UserEntity user);
 
     // read operation
     List<UserEntity> fetchUserList();
@@ -20,5 +20,8 @@ public interface UserService {
     // delete operation
     void deleteUserById(Long userId);
 
+    public UserEntity getUserByUsernamePassword(String username,String password);
 
+
+    void shouldCreateUser(UserEntity any);
 }

@@ -1,26 +1,45 @@
 package com.example.gym.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "customer", schema = "pi_ag", catalog = "")
 public class CustomerEntity {
-    private int id;
+    private Integer id;
+//    @JsonIgnore
+//    public CustomerEntity(Integer id, String firstname, String lastname, Date birthdate, Integer genderId) {
+//        this.id = id;
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.birthdate = birthdate;
+//        this.genderId = genderId;
+//    }
+
     private String firstname;
     private String lastname;
     private Date birthdate;
-    private int genderId;
+    private Integer genderId;
+    private GenderEntity gender;
+    private CustomerSubscriptionEntity customerSubscription;
 
+
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,24 +75,46 @@ public class CustomerEntity {
 
     @Basic
     @Column(name = "gender_id", nullable = false)
-    public int getGenderId() {
+    public Integer getGenderId() {
         return genderId;
     }
 
-    public void setGenderId(int genderId) {
+    public void setGenderId(Integer genderId) {
         this.genderId = genderId;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerEntity that = (CustomerEntity) o;
-        return id == that.id && genderId == that.genderId && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(birthdate, that.birthdate);
+        return Objects.equals(id, that.id) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(birthdate, that.birthdate) && Objects.equals(genderId, that.genderId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, firstname, lastname, birthdate, genderId);
     }
+
+    @ManyToOne()
+    @JoinColumn(name = "gender_id", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
+    public GenderEntity getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderEntity gender) {
+        this.gender = gender;
+    }
+
+    @OneToOne(mappedBy = "customerByCustomerId",fetch = FetchType.LAZY)
+    public CustomerSubscriptionEntity getCustomerSubscription() {
+        return customerSubscription;
+    }
+
+    public void setCustomerSubscription(CustomerSubscriptionEntity customerSubscription) {
+        this.customerSubscription = customerSubscription;
+    }
+
 }

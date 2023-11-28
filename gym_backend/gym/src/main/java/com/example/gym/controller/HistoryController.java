@@ -11,52 +11,56 @@ import java.util.Optional;
 
 // Annotation
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 
 // Class
+@RequestMapping("/api")
+
 public class HistoryController {
 
     // Annotation
-    @Autowired private HistoryService historyService;
+    @Autowired
+    private HistoryService historyService;
 
     // Save operation
-    @PostMapping("/historys/save")
+    @PostMapping("/histories/save")
     public HistoryEntity saveHistory(
-            @Valid @RequestBody HistoryEntity history)
-    {
-
+            @Valid @RequestBody HistoryEntity history) {
         return historyService.saveHistory(history);
     }
 
     // Read operation
-    @GetMapping("/historys")
-    public List<HistoryEntity> fetchHistoryList()
-    {
+    @GetMapping("/histories")
+    public List<HistoryEntity> fetchHistoryList() {
 
         return historyService.fetchHistoryList();
     }
-    @GetMapping("/historys/{id}")
-    public Optional<HistoryEntity> fetchHistoryId(@PathVariable("id") Long historyId)
-    {
+
+    @GetMapping("/histories/{id}")
+    public Optional<HistoryEntity> fetchHistoryId(@PathVariable("id") Long historyId) {
 
         return historyService.fetchHistoryId(historyId);
     }
 
+    @GetMapping("/histories/customer/{id}")
+    public List<HistoryEntity> fetchHistoryByCustomerId(@PathVariable("id") Long historyId) {
+
+        return historyService.fetchHistoryByCustomerId(historyId);
+    }
     // Update operation
-    @PutMapping("/historys/update/{id}")
+    @PutMapping("/histories/update/{id}")
     public HistoryEntity
     updateHistory(@RequestBody HistoryEntity history,
-                  @PathVariable("id") Long historyId)
-    {
+                  @PathVariable("id") Long historyId) {
 
         return historyService.updateHistory(
                 history, historyId);
     }
 
     // Delete operation
-    @DeleteMapping("/historys/delete/{id}")
+    @DeleteMapping("/histories/delete/{id}")
     public String deleteHistoryById(@PathVariable("id")
-                                            Long historyId)
-    {
+                                    Long historyId) {
 
         historyService.deleteHistoryById(
                 historyId);

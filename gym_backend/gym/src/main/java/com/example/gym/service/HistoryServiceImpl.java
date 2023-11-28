@@ -53,4 +53,9 @@ public class HistoryServiceImpl implements HistoryService{
         historyRepository.deleteById(historyId);
     }
 
+    @Override
+    public List<HistoryEntity> fetchHistoryByCustomerId(Long historyId) {
+        return  historyRepository.findByCustomerId(historyId);
+    }
+
 }

@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+  background:lightgrey;
+}
+#root{
+  height: 100%; 
+}
+#myContainer{
+
+  background-color: white;
+  min-height: 90vh;
+  padding:2em;
+  margin-top:10px;
+  border-radius:1em;
+}
